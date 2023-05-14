@@ -31,26 +31,30 @@ export function Home() {
   }
 
   const onRemoveTask = (id: string) => {
-    Alert.alert('Confirmação', `Deseja remover a tarefa ${tasks.find(t => t.id === id)?.task} da lista?`, [
-      {
-        text: 'Sim',
-        onPress: () => setTasks(tasks.filter((task) => task.id !== id)),
-      },
-      {
-        text: 'Não',
-        style: 'cancel',
-      },
-    ])
+    Alert.alert(
+      'Confirmação',
+      `Deseja remover a tarefa ${tasks.find((t) => t.id === id)?.task} da lista?`,
+      [
+        {
+          text: 'Sim',
+          onPress: () => setTasks(tasks.filter((task) => task.id !== id)),
+        },
+        {
+          text: 'Não',
+          style: 'cancel',
+        },
+      ],
+    )
   }
 
   const onCompleteTask = (id: string) => {
     setTasks(
-      tasks.map((task) => {
-        if (task.id === id) {
-          task.isDone = !task.isDone
-          task.updatedAt = dateFormat(new Date())
+      tasks.map((draft) => {
+        if (draft.id === id) {
+          draft.isDone = !draft.isDone
+          draft.updatedAt = dateFormat(new Date())
         }
-        return task
+        return draft
       }),
     )
   }
@@ -66,11 +70,7 @@ export function Home() {
         <Form onAdd={onAddTask} />
         <View style={styles.listHeader}>
           <TagCount title="Criadas" count={totalTasks} color="secondary_500" />
-          <TagCount
-            title="Concluídas"
-            count={totalPending}
-            color="primary_500"
-          />
+          <TagCount title="Concluídas" count={totalPending} color="primary_500" />
         </View>
         <FlatList
           data={tasks}

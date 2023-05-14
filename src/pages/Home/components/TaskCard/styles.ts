@@ -38,7 +38,6 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.primary_700,
     borderColor: colors.primary_700,
     borderWidth: 2,
-
   },
   title: {
     flex: 1,
